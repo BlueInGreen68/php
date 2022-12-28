@@ -195,6 +195,7 @@ let maxValue = parseInt(prompt('Максимальное значение чис
 alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
 
 let answerNumber = Math.floor((minValue + maxValue) / 2);
+console.log(answerNumber);
 let orderNumber = 1;
 let gameRun = true;
 
@@ -214,6 +215,7 @@ document.getElementById('btnRetry').addEventListener('click', function () {
     alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
 
     answerNumber = Math.floor((minValue + maxValue) / 2);
+    console.log(answerNumber);
     orderNumber = 1;
     gameRun = true;
 
@@ -235,6 +237,7 @@ document.getElementById('btnOver').addEventListener('click', function () {
             let randomFieldNumber = Math.round(Math.random() * 3);
             minValue = answerNumber + 1;
             answerNumber = Math.floor((minValue + maxValue) / 2);
+            console.log(answerNumber);
             orderNumber++;
             orderNumberField.innerText = orderNumber;
             let answerFieldArr = [`Да это легко! Ты загадал ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Наверное, это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Ага! Это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Признавайтесь) Это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`];
@@ -257,6 +260,7 @@ document.querySelector('#btnLess').addEventListener('click', function () {
             let randomFieldNumber = Math.round(Math.random() * 3);
             maxValue = answerNumber - 1;
             answerNumber = Math.floor((minValue + maxValue) / 2);
+            console.log(answerNumber);
             orderNumber++;
             orderNumberField.innerText = orderNumber;
             let answerFieldArr = [`Да это легко! Ты загадал ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Наверное, это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Ага! Это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Признавайтесь) Это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`];
