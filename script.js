@@ -26,7 +26,7 @@ function numberDecomposition(num, numConcat, numCheck) {
     }
 
     let result = numConcat(sign, hundreds, dozens, units);
-    return numCheck(result, num);
+    return numCheck(result, num, sign);
 }
 
 function numberConcat(sign, hundreds, dozens, units) {
@@ -109,28 +109,28 @@ function numberConcat(sign, hundreds, dozens, units) {
             }
             break;
         case "2":
-            dozens = "двадцать";
+            dozens = " двадцать";
             break;
         case "3":
-            dozens = "тридцать";
+            dozens = " тридцать";
             break;
         case "4":
-            dozens = "сорок";
+            dozens = " сорок";
             break;
         case "5":
-            dozens = "пятьдесят";
+            dozens = " пятьдесят";
             break;
         case "6":
-            dozens = "шестьдесят";
+            dozens = " шестьдесят";
             break;
         case "7":
-            dozens = "семьдесят";
+            dozens = " семьдесят";
             break;
         case "8":
-            dozens = "восемьдесят";
+            dozens = " восемьдесят";
             break;
         case "9":
-            dozens = "девяносто";
+            dozens = " девяносто";
             break;
         default:
             dozens = "";
@@ -139,47 +139,48 @@ function numberConcat(sign, hundreds, dozens, units) {
 
     switch (units) {
         case '1':
-            units = "один";
+            units = " один";
             break;
         case '2':
-            units = "два";
+            units = " два";
             break;
         case '3':
-            units = "три";
+            units = " три";
             break;
         case '4':
-            units = "четыре";
+            units = " четыре";
             break;
         case '5':
-            units = "пять";
+            units = " пять";
             break;
         case '6':
-            units = "шесть";
+            units = " шесть";
             break;
         case '7':
-            units = "семь";
+            units = " семь";
             break;
         case '8':
-            units = "восемь";
+            units = " восемь";
             break;
         case '9':
-            units = "девять";
+            units = " девять";
             break;
         default:
             units = "";
             break;
     }
 
-    return result = sign + hundreds + " " + dozens + " " + units;
+    return result = sign + hundreds + dozens + units;
 }
 
-function numberCheck(result, num) {
+function numberCheck(result, num, sign) {
+    sign = "-";
     if (num === "0") {
         return num;
     } else if (result.length < 20) {
         return result;
     } else {
-        return num;
+        return sign + num;
     }
 }
 
