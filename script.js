@@ -67,43 +67,43 @@ function numberConcat(sign, hundreds, dozens, units) {
         case '1':
             switch (units) {
                 case "0":
-                    dozens = "десять";
+                    dozens = " десять";
                     units = "";
                     break;
                 case "1":
-                    dozens = "одинадцать";
+                    dozens = " одинадцать";
                     units = "";
                     break;
                 case "2":
-                    dozens = "двенадцать";
+                    dozens = " двенадцать";
                     units = "";
                     break;
                 case "3":
-                    dozens = "тринадцать";
+                    dozens = " тринадцать";
                     units = "";
                     break;
                 case "4":
-                    dozens = "четырнадцать";
+                    dozens = " четырнадцать";
                     units = "";
                     break;
                 case "5":
-                    dozens = "пятнадцать";
+                    dozens = " пятнадцать";
                     units = "";
                     break;
                 case "6":
-                    dozens = "шестнадцать";
+                    dozens = " шестнадцать";
                     units = "";
                     break;
                 case "7":
-                    dozens = "семнадцать";
+                    dozens = " семнадцать";
                     units = "";
                     break;
                 case "8":
-                    dozens = "восемнадцать";
+                    dozens = " восемнадцать";
                     units = "";
                     break;
                 case "9":
-                    dozens = "девятнадцать";
+                    dozens = " девятнадцать";
                     units = "";
                     break;
             }
@@ -193,6 +193,12 @@ let minValue = parseInt(prompt('Минимальное значение числ
 let maxValue = parseInt(prompt('Максимальное значение числа для игры', '100')) || maxValueDefault;
 (maxValue < -999) ? maxValue = -999 : (maxValue >= 1000) ? maxValue = 999 : maxValue;
 
+if (minValue > maxValue) {
+    let buf = minValue;
+    minValue = maxValue;
+    maxValue = buf;
+}
+
 alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
 
 let answerNumber = Math.floor((minValue + maxValue) / 2);
@@ -249,7 +255,11 @@ document.getElementById('btnOver').addEventListener('click', function () {
 
 document.querySelector('#btnLess').addEventListener('click', function () {
     if (gameRun) {
-        if (minValue === maxValue) {
+        (minValue === answerNumber && maxValue !== minValue) ? maxValue-- : null;
+        console.log(`Максимальное число до ${maxValue}`);
+        console.log(`Минимальное число до ${minValue}`);
+        console.log(`Текущее число до ${answerNumber}`);
+        if (maxValue === minValue) {
             const phraseRandom = Math.round(Math.random());
             const answerPhrase = (phraseRandom === 1) ?
                 `Вы загадали неправильное число!\n\u{1F914}` :
@@ -261,11 +271,13 @@ document.querySelector('#btnLess').addEventListener('click', function () {
             let randomFieldNumber = Math.round(Math.random() * 3);
             maxValue = answerNumber - 1;
             answerNumber = Math.floor((minValue + maxValue) / 2);
-            console.log(answerNumber);
             orderNumber++;
             orderNumberField.innerText = orderNumber;
             let answerFieldArr = [`Да это легко! Ты загадал ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Наверное, это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Ага! Это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Признавайтесь) Это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`];
             answerField.innerText = answerFieldArr[randomFieldNumber];
+            console.log(`Максимальное число после ${maxValue}`);
+            console.log(`Минимальное число после ${minValue}`);
+            console.log(`Текущее число после ${answerNumber}`);
         }
     }
 })
