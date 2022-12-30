@@ -189,39 +189,30 @@ function numberCheck(result, num, sign) {
     }
 }
 
+let minValue = 0;
+let maxValue = 0;
+let answerNumber = 0;
+let orderNumber = 1;
+let gameRun;
+
+let game = document.querySelector(".card_disabled");
+let form = document.querySelector(".start");
+let minValueInput = document.querySelector(".start__prompt-min");
+let maxValueInput = document.querySelector(".start__prompt-max");
+let startButton = document.querySelector(".start__button");
+
 let minValueDefault = 0;
 let maxValueDefault = 100;
-
-let minValue = parseInt(prompt('Минимальное значение числа для игры', '0')) || minValueDefault;
-(minValue < -999) ? minValue = -999 : (minValue >= 1000) ? minValue = 999 : minValue;
-
-let maxValue = parseInt(prompt('Максимальное значение числа для игры', '100')) || maxValueDefault;
-(maxValue < -999) ? maxValue = -999 : (maxValue >= 1000) ? maxValue = 999 : maxValue;
-
-if (minValue > maxValue) {
-    let buf = minValue;
-    minValue = maxValue;
-    maxValue = buf;
-}
-
-alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
-
-let answerNumber = Math.floor((minValue + maxValue) / 2);
-console.log(answerNumber);
-let orderNumber = 1;
-let gameRun = true;
 
 const orderNumberField = document.getElementById('orderNumberField');
 const answerField = document.getElementById('answerField');
 
-orderNumberField.innerText = orderNumber;
-answerField.innerText = `Вы загадали число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`;
+startButton.addEventListener('click', function () {
+    minValue = parseInt(minValueInput.value) || minValueDefault;
+    maxValue = parseInt(maxValueInput.value) || maxValueDefault;
 
-document.getElementById('btnRetry').addEventListener('click', function () {
-    minValue = parseInt(prompt('Минимальное знание числа для игры', '0')) || minValueDefault;
     (minValue < -999) ? minValue = -999 : (minValue >= 1000) ? minValue = 999 : minValue;
 
-    maxValue = parseInt(prompt('Максимальное знание числа для игры', '100')) || maxValueDefault;
     (maxValue < -999) ? maxValue = -999 : (maxValue >= 1000) ? maxValue = 999 : maxValue;
 
     if (minValue > maxValue) {
@@ -232,20 +223,30 @@ document.getElementById('btnRetry').addEventListener('click', function () {
 
     alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
 
+    form.classList.add("start_disabled");
+    game.classList.remove("card_disabled");
+
     answerNumber = Math.floor((minValue + maxValue) / 2);
-    console.log(answerNumber);
     orderNumber = 1;
     gameRun = true;
 
     orderNumberField.innerText = orderNumber;
     answerField.innerText = `Вы загадали число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`;
+});
+
+document.getElementById('btnRetry').addEventListener('click', function () {
+    minValueInput.value = "";
+    maxValueInput.value = "";
+
+    form.classList.remove("start_disabled");
+    game.classList.add("card_disabled");
+
+    answerNumber = Math.floor((minValue + maxValue) / 2);
+    orderNumber = 1;
 })
 
 document.getElementById('btnOver').addEventListener('click', function () {
     if (gameRun) {
-        console.log(`Максимальное число до ${maxValue}`);
-        console.log(`Минимальное число до ${minValue}`);
-        console.log(`Текущее число до ${answerNumber}`);
         if (minValue === maxValue) {
             const phraseRandom = Math.round(Math.random());
             const answerPhrase = (phraseRandom === 1) ?
@@ -263,9 +264,6 @@ document.getElementById('btnOver').addEventListener('click', function () {
             orderNumberField.innerText = orderNumber;
             let answerFieldArr = [`Да это легко! Ты загадал ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Наверное, это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Ага! Это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Признавайтесь) Это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`];
             answerField.innerText = answerFieldArr[randomFieldNumber];
-            console.log(`Максимальное число после ${maxValue}`);
-            console.log(`Минимальное число после ${minValue}`);
-            console.log(`Текущее число после ${answerNumber}`);
         }
     }
 })
@@ -273,9 +271,6 @@ document.getElementById('btnOver').addEventListener('click', function () {
 document.querySelector('#btnLess').addEventListener('click', function () {
     if (gameRun) {
         (minValue === answerNumber && maxValue !== minValue) ? maxValue-- : null;
-        console.log(`Максимальное число до ${maxValue}`);
-        console.log(`Минимальное число до ${minValue}`);
-        console.log(`Текущее число до ${answerNumber}`);
         if (maxValue === minValue) {
             const phraseRandom = Math.round(Math.random());
             const answerPhrase = (phraseRandom === 1) ?
@@ -292,9 +287,6 @@ document.querySelector('#btnLess').addEventListener('click', function () {
             orderNumberField.innerText = orderNumber;
             let answerFieldArr = [`Да это легко! Ты загадал ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Наверное, это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Ага! Это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Признавайтесь) Это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`];
             answerField.innerText = answerFieldArr[randomFieldNumber];
-            console.log(`Максимальное число после ${maxValue}`);
-            console.log(`Минимальное число после ${minValue}`);
-            console.log(`Текущее число после ${answerNumber}`);
         }
     }
 })

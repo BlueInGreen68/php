@@ -14,7 +14,21 @@
     <div class="container">
         <div class="row game-card align-items-center">
             <div class="col col-md-4 offset-md-4">
-                <div class="card text-center">
+                <form class="start start_margin-bottom_20px">
+                    <fieldset class="start__wrapper">
+                        <legend class="start__title">Начало игры!</legend>
+                        <label class="start__question">
+                            Минимальное значение числа для игры:
+                            <input type="text" class="start__prompt-min">
+                        </label>
+                        <label class="start__question">
+                            Максимальное значение числа для игры:
+                            <input type="text" class="start__prompt-max">
+                        </label>
+                        <button type="button" class="start__button">Начать!</button>
+                    </fieldset>
+                </form>
+                <div class="card text-center card_disabled">
                     <div class="card-header">
                         <p class="m-0">Вопрос №<span id="orderNumberField">5</span></p>
                     </div>

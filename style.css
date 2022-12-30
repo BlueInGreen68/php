@@ -42,3 +42,38 @@ body {
     color: white;
     transition: background-color 0.2s linear;
 }
+
+.start_margin-bottom_20px {
+    margin: 0 0 20px 0;
+}
+
+.start_disabled {
+    display: none;
+}
+
+.card_disabled {
+    display: none;
+}
+
+.start__wrapper {
+    min-width: revert;
+    padding: revert;
+    margin: revert;
+    border: revert;
+}
+
+.start__title {
+    font-size: 2.5rem;
+    color: wheat;
+}
+
+.start__question {
+    font-size: 1.5rem;
+    color: black;
+}
+
+.start__button {
+    font-size: 2rem;
+    display: block;
+    margin: 10px auto;
+}
