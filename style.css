@@ -60,6 +60,7 @@ body {
     padding: revert;
     margin: revert;
     border: revert;
+    text-align: center;
 }
 
 .start__title {
