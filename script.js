@@ -224,6 +224,12 @@ document.getElementById('btnRetry').addEventListener('click', function () {
     maxValue = parseInt(prompt('Максимальное знание числа для игры', '100')) || maxValueDefault;
     (maxValue < -999) ? maxValue = -999 : (maxValue >= 1000) ? maxValue = 999 : maxValue;
 
+    if (minValue > maxValue) {
+        let buf = minValue;
+        minValue = maxValue;
+        maxValue = buf;
+    }
+
     alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
 
     answerNumber = Math.floor((minValue + maxValue) / 2);
