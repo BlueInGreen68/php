@@ -174,7 +174,12 @@ function numberConcat(sign, hundreds, dozens, units) {
 }
 
 function numberCheck(result, num, sign) {
-    sign = "-";
+    if (answerNumber > 0) {
+        sign = "";
+    } else {
+        sign = "-";
+    }
+
     if (num === "0") {
         return num;
     } else if (result.length < 20) {
@@ -232,6 +237,9 @@ document.getElementById('btnRetry').addEventListener('click', function () {
 
 document.getElementById('btnOver').addEventListener('click', function () {
     if (gameRun) {
+        console.log(`Максимальное число до ${maxValue}`);
+        console.log(`Минимальное число до ${minValue}`);
+        console.log(`Текущее число до ${answerNumber}`);
         if (minValue === maxValue) {
             const phraseRandom = Math.round(Math.random());
             const answerPhrase = (phraseRandom === 1) ?
@@ -249,6 +257,9 @@ document.getElementById('btnOver').addEventListener('click', function () {
             orderNumberField.innerText = orderNumber;
             let answerFieldArr = [`Да это легко! Ты загадал ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Наверное, это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Ага! Это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`, `Признавайтесь) Это число ${numberDecomposition(answerNumber, numberConcat, numberCheck)}?`];
             answerField.innerText = answerFieldArr[randomFieldNumber];
+            console.log(`Максимальное число после ${maxValue}`);
+            console.log(`Минимальное число после ${minValue}`);
+            console.log(`Текущее число после ${answerNumber}`);
         }
     }
 })
